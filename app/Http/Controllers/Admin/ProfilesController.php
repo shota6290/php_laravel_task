@@ -32,7 +32,7 @@ class ProfilesController extends Controller
         $profiles->fill($form);
         $profiles->save();
 
-      return redirect('admin/profiles/create');
+      return redirect('admin/profile/create');
   }
   
   
@@ -57,7 +57,7 @@ class ProfilesController extends Controller
   if(empty($profile)){
     abort(404);
   }
-  return view('admin.profiles.edit'.['profile_form'=>$profile]);
+  return view('admin.profiles.edit',['profile_form'=>$profile]);
   }
   
   
@@ -66,20 +66,29 @@ class ProfilesController extends Controller
       // Validationをかける
       $this->validate($request, Profile::$rules);
       // News Modelからデータを取得する
-      $profile = Profile::find($request->id);
+      $profiles = Profile::find($request->id);
       // 送信されてきたフォームデータを格納する
-      $profile_form = $request->all();
-      unset($profile_form['_token']);
+      $profiles_form = $request->all();
+      unset($profiles_form['_token']);
       
       
-        unset($profile_form['image']);
-        unset($profile_form['remove']);
-        unset($profile_form['_token']);
+        unset($profiles_form['image']);
+        unset($profiles_form['remove']);
+        unset($profiles_form['_token']);
         
 
-      $profile->fill($profile_form)->save();
-      return redirect('admin/profiles');
+      $profiles->fill($profiles_form)->save();
+      return redirect('admin/profile');
   }
+  
+      public function delete(Request $request)
+    {
+      $profiles = Profile::find($request->id);
+      
+      $profiles->delete();
+      return redirect('admin/profile/');
+    }
+  
   
   
   

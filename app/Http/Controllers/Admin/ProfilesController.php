@@ -6,11 +6,11 @@ use App\Http\Controllers\Controller;
 // 以下を追記することでNews Modelが扱えるようになる
 use App\Profile;
 
-class ProfileController extends Controller
+class ProfilesController extends Controller
 {
   public function add()
   {
-      return view('admin.profile.create');
+      return view('admin.profiles.create');
   }
 
   public function create(Request $request)
@@ -20,7 +20,7 @@ class ProfileController extends Controller
       // Varidationを行う
       $this->validate($request, Profile::$rules);
 
-      $profile = new Profile;
+      $profiles = new Profile;
       $form = $request->all();
 
 
@@ -29,8 +29,10 @@ class ProfileController extends Controller
       unset($form['_token']);
       // フォームから送信されてきたimageを削除する
      
+        $profiles->fill($form);
+        $profiles->save();
 
-      return redirect('admin/profile/create');
+      return redirect('admin/profiles/create');
   }
   
   
@@ -44,7 +46,7 @@ class ProfileController extends Controller
             // それ以外はすべてのニュースを取得する
             $posts = Profile::all();
         }
-        return view('admin.profile.index', ['posts' => $posts, 'cond_title' => $cond_title]);
+        return view('admin.profiles.index', ['posts' => $posts, 'cond_title' => $cond_title]);
     }
     
   
@@ -55,7 +57,7 @@ class ProfileController extends Controller
   if(empty($profile)){
     abort(404);
   }
-  return view('admin.profile.edit'.['profile_form'=>$profile]);
+  return view('admin.profiles.edit'.['profile_form'=>$profile]);
   }
   
   
@@ -76,7 +78,7 @@ class ProfileController extends Controller
         
 
       $profile->fill($profile_form)->save();
-      return redirect('admin/profile');
+      return redirect('admin/profiles');
   }
   
   

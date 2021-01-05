@@ -8,10 +8,10 @@
     </div>
     <div class="row">
         <div class="col-md-4">
-            <a href="{{ action('Admin\ProfileController@add') }}" role="button" class="btn btn-primary">新規作成</a>
+            <a href="{{ action('Admin\ProfilesController@add') }}" role="button" class="btn btn-primary">新規作成</a>
         </div>
         <div class="col-md-8">
-            <form action="{{ action('Admin\ProfileController@index') }}" method="get">
+            <form action="{{ action('Admin\ProfilesController@index') }}" method="get">
                 <div class="form-group row">
                     <label class="col-md-2">タイトル</label>
                     <div class="col-md-8">
@@ -48,10 +48,10 @@
                              <td>{{ \Str::limit($profile->introduction, 100) }}</td>
                             <td>
                                 <div>
-                                    <a href="{{ action('Admin\ProfileController@edit', ['id' => $profile->id]) }}">編集</a>
+                                    <a href="{{ action('Admin\ProfilesController@edit', ['id' => $profile->id]) }}">編集</a>
                                 </div>
                                 <div>
-                                    <a href="{{ action('Admin\ProfileController@delete', ['id' => $profile->id]) }}">削除</a>
+                                    <a href="{{ action('Admin\ProfilesController@delete', ['id' => $profile->id]) }}">削除</a>
                                 </div>
                             </td>
                         </tr>

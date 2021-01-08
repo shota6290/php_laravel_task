@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 // 以下を追記することでNews Modelが扱えるようになる
 use App\Profile;
 
+use App\ProfileHistory;
+
+use Carbon\Carbon;
+
 class ProfilesController extends Controller
 {
   public function add()
@@ -78,6 +82,12 @@ class ProfilesController extends Controller
         
 
       $profiles->fill($profiles_form)->save();
+      
+      $history = new ProfileHistory;
+      $history->profile_id = $profiles->id;
+      $history->edited_at = Carbon::now();
+      $history->save();
+      
       return redirect('admin/profile');
   }
   

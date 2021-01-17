@@ -8,7 +8,7 @@
     </div>
     <div class="row">
         <div class="col-md-4">
-            <a href="{{ action('Admin\ProfilesController@add') }}" role="button" class="btn btn-primary">新規作成</a>
+            <a href="{{ action('Admin\ProfilesController@add') }}" role="button" class="btn btn-primary">プロフィールを新規作成しよう</a>
         </div>
         <div class="col-md-8">
             <form action="{{ action('Admin\ProfilesController@index') }}" method="get">
